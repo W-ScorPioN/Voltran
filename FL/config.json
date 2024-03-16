@@ -1,0 +1,40 @@
+{
+	"taskID": "123",
+	"totalRound": 9,
+    "currentRound":0,
+	"clientNumber": 1,
+	"version":1,
+    "indexnumber":1,
+	"clients": [
+		"31",
+		"32",
+		"33",
+		"34"
+	],
+	"distribution": [{
+			"key": [0, 1, 2],
+			"index":1,
+			"dispath": [{
+					"clientID": ["31", "32"],
+					"sgxIP": "127.0.0.1:9001"
+				},
+				{
+					"clientID": ["33"],
+					"sgxIP": "127.0.0.1:9002"
+				},
+				{
+					"clientID": ["34"],
+					"sgxIP": "127.0.0.1:9003"
+				}
+			]
+		},
+		{
+			"key": [3, 4, 5, 6, 7],
+			"index":2,
+			"dispath": [{
+				"clientID": ["31", "32", "33", "34"],
+				"sgxIP": "127.0.0.1:9004"
+			}]
+		}
+	]
+}
