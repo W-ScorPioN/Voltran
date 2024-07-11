@@ -1,0 +1,7 @@
+{
+	"ip":"10.50.146.119",
+	"port":6001,
+	"parallelAggNumber":4,
+	"tcsNum":1,
+	"chainServer":"http://10.50.146.119:9001"
+}

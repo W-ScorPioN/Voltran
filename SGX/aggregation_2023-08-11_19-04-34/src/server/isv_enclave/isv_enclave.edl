@@ -1,0 +1,94 @@
+/*
+ * Copyright (C) 2011-2021 Intel Corporation. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in
+ *     the documentation and/or other materials provided with the
+ *     distribution.
+ *   * Neither the name of Intel Corporation nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ */
+
+enclave {
+    from "sgx_tkey_exchange.edl" import *;
+    from "sgx_tstdc.edl" import sgx_thread_wait_untrusted_event_ocall, sgx_thread_set_untrusted_event_ocall, sgx_thread_setwait_untrusted_events_ocall, sgx_thread_set_multiple_untrusted_events_ocall;
+
+    include "sgx_key_exchange.h"
+    include "sgx_trts.h"
+
+    trusted {
+        public sgx_status_t enclave_init_ra(int b_pse,
+                                            [out] sgx_ra_context_t *p_context);
+        public sgx_status_t enclave_ra_close(sgx_ra_context_t context);
+        public sgx_status_t verify_att_result_mac(sgx_ra_context_t context,
+                                                  [in,size=message_size] uint8_t* message, 
+                                                  size_t message_size, 
+                                                  [in,size=mac_size] uint8_t* mac, 
+                                                  size_t mac_size);
+        public sgx_status_t initEnclaveEnv(sgx_ra_context_t context,
+                                    [in,size=cfg_size] uint8_t* p_scheduleCfg,
+                                    uint32_t cfg_size,
+                                    [in,size=sgxID_size] uint8_t* p_sgxID,
+                                    uint32_t sgxID_size);
+        public sgx_status_t aggregating_client(sgx_ra_context_t context,  
+                                            [in,size=model_size] uint8_t* p_model,
+                                            uint32_t model_size,
+                                            [in,count=16] uint8_t* p_gcm_mac,
+                                            [out] uint32_t *p_finish);
+       
+        public sgx_status_t get_mult_sgx_agg_status(sgx_ra_context_t context, 
+                                            [out] uint32_t *p_finish);
+        public sgx_status_t get_wt1_and_sign_size(sgx_ra_context_t context,
+                                         [out] uint32_t *p_taskID,
+                                         [out] uint32_t *p_round,
+                                         [out] uint32_t *p_wt1_size,
+                                         [out] uint32_t *p_wt1_mac_size,
+                                         [out] uint32_t *p_signWt1_size);
+        public sgx_status_t get_wt1_and_sign_size_by_key(sgx_ra_context_t context,
+                                         [in,size=key_size] uint8_t* p_keys,
+                                         uint32_t key_size,
+                                         [out] uint32_t *p_taskID,
+                                         [out] uint32_t *p_round,
+                                         [out] uint32_t *p_wt1_size,
+                                         [out] uint32_t *p_wt1_mac_size,
+                                         [out] uint32_t *p_signWt1_size);
+        public sgx_status_t get_wt1_and_sign(sgx_ra_context_t context,
+                                   [out,size=out_size_wt1] uint8_t* p_wt1,
+                                   uint32_t out_size_wt1,
+                                   [out,size=out_size_wt1_mac] uint8_t* p_wt1_mac,
+                                   uint32_t out_size_wt1_mac,
+                                   [out,size=out_size_sign] uint8_t* p_sign,
+                                   uint32_t out_size_sign);
+        public sgx_status_t get_wt1_and_sign_by_key(sgx_ra_context_t context,
+                                   [in,size=key_size] uint8_t* p_keys,
+                                   uint32_t key_size,
+                                   [out,size=out_size_wt1] uint8_t* p_wt1,
+                                   uint32_t out_size_wt1,
+                                   [out,size=out_size_wt1_mac] uint8_t* p_wt1_mac,
+                                   uint32_t out_size_wt1_mac,
+                                   [out,size=out_size_sign] uint8_t* p_sign,
+                                   uint32_t out_size_sign);
+        
+    };
+
+};

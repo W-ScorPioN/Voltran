@@ -1,0 +1,15 @@
+com\oppo\vlr\MyApplication.class
+com\oppo\vlr\vo\ResponseVO.class
+com\oppo\vlr\config\GatewayConfig.class
+com\oppo\vlr\vo\ResponseCode.class
+com\oppo\vlr\vo\ResultBody.class
+com\oppo\vlr\exception\BaseErrorInfoInterface.class
+com\oppo\vlr\exception\ChainException.class
+com\oppo\vlr\entity\TaskLog.class
+com\oppo\vlr\config\SwaggerConfig.class
+com\oppo\vlr\exception\CommonEnum.class
+com\oppo\vlr\controller\teeController.class
+com\oppo\vlr\exception\GlobalExceptionHandler.class
+com\oppo\vlr\exception\BizException.class
+com\oppo\vlr\entity\GModel.class
+com\oppo\vlr\entity\Message.class

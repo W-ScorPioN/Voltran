@@ -1,0 +1,33 @@
+{
+	"taskID": 123,
+	"totalRound": 9,
+    "currentRound":0,
+	"clientNumber": 10,
+	"version":1,
+	"clients": [
+		"31",
+		"32"
+	],
+	"distribution": [
+		{
+			"key": [78,84,96,114],
+			"sendPack":[
+				{
+					"index":0,
+					"key":[78,84]
+				},
+				{
+					"index":1,
+					"key":[96,114]
+				}
+			],
+			"index":0,
+			"dispath": [
+				{
+					"clientID": ["0","1","2","3","4","5","6","7","8","9"],
+					"sgxIP": "10.50.146.119:6001"
+				}
+			]
+		}
+	]
+}
